@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
+import Logo from '@/components/ui/Logo';
 import SearchForm from '@/components/search/SearchForm';
 import { SearchQuery } from '@/lib/types';
 import { searchProducts, saveSearch } from '@/lib/services/searchService';
@@ -70,7 +71,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black">
+    <div className="flex flex-col min-h-screen" style={{ backgroundColor: '#f1efe7' }}>
       <Header />
       
       <main className="flex-grow">
@@ -91,131 +92,130 @@ export default function Home() {
                       animationDelay: `${i * 0.5}s` 
                     }}
                   />
-                  <div className="absolute inset-0 bg-black/30"></div>
+                  <div className="absolute inset-0" style={{ backgroundColor: 'rgba(241, 239, 231, 0.3)' }}></div>
                 </div>
               ))}
             </div>
             
             {/* Diagonal Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#f1efe7]/80 via-[#f1efe7]/60 to-transparent"></div>
             
-            {/* Accent Lines - Vogue-inspired */}
-            <div className="absolute left-0 top-0 w-px h-full bg-white/20"></div>
-            <div className="absolute right-0 top-0 w-px h-full bg-white/20"></div>
-            <div className="absolute top-1/3 left-0 w-full h-px bg-white/10"></div>
-            <div className="absolute bottom-1/3 left-0 w-full h-px bg-white/10"></div>
-          </div>
-          
-          {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
-            <div className="text-center mb-16">
-              <h1 className="text-7xl md:text-9xl font-bold text-white mb-4 tracking-tighter font-serif">
-                ratonica
-              </h1>
-              <p className="text-xl md:text-2xl text-white/90 font-light tracking-wide uppercase">
-                Discover Vintage Fashion Treasures
-                <br />
-                <span className="text-lg md:text-xl tracking-widest">across marketplaces</span>
-              </p>
-            </div>
-            
-            {/* Search Container - Keeping this clean as requested */}
-            <div className="w-full max-w-2xl mx-auto">
-              <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border border-white/20">
-                <form onSubmit={handleSearch} className="p-6">
-                  {imagePreview ? (
-                    <div className="mb-4 relative">
-                      <div className="relative w-full h-64 rounded-lg overflow-hidden border border-gray-100">
-                        <Image 
-                          src={imagePreview}
-                          alt="Preview"
-                          fill
-                          className="object-contain"
-                        />
-                        <button
-                          type="button"
-                          onClick={clearImagePreview}
-                          className="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mb-4">
-                      <input 
-                        type="text" 
-                        placeholder="Paste URL or search..." 
-                        className="w-full px-4 py-3 text-lg border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white/70"
-                        value={urlInput}
-                        onChange={(e) => setUrlInput(e.target.value)}
-                      />
-                    </div>
-                  )}
-                  
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    className="hidden"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                  />
-                  
-                  <div className="flex items-center gap-4 mb-4">
-                    <button 
-                      type="button"
-                      className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-900 transition-colors"
-                      onClick={triggerFileUpload}
-                    >
-                      <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                        <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} className="invert" />
-                      </div>
-                      <span>Upload Image</span>
-                    </button>
-                    
-                    <div className="flex items-center gap-2">
-                      <div className="w-10 h-6 bg-black/10 rounded-full relative">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
-                      </div>
-                      <span className="text-sm text-gray-700 font-light">Deep search</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center">
-                        <span className="text-xs font-bold text-gray-700">E</span>
-                      </div>
-                      <span className="text-sm text-gray-700 font-light">Expert search</span>
-                    </div>
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+              {/* Logo and Tagline Section - Top of page */}
+              <div className="text-center mt-20 mb-0">
+                <div className="relative flex flex-col items-center">
+                  <div className="w-[960px] h-[384px] relative">
+                    <Logo className="w-full h-full" />
                   </div>
-                  
-                  <button 
-                    type="submit" 
-                    className="w-10 h-10 bg-black rounded-full flex items-center justify-center ml-auto hover:bg-gray-900 transition-colors"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                    ) : (
-                      <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
-                    )}
-                  </button>
-                </form>
-                
-                <div className="px-6 py-3 bg-black/5 text-xs text-gray-500 font-light tracking-wider">
-                  SEARCH ACROSS: <span className="font-medium">VINTED</span> · <span className="font-medium">ETSY</span> · <span className="font-medium">DEPOP</span> · <span className="font-medium">EBAY</span> · <span className="font-medium">VESTIAIRE</span>
+                  <div className="mt-[-140px]">
+                    <p className="text-lg md:text-xl text-black/80 font-light tracking-wide uppercase">
+                      Discover Vintage Fashion Treasures
+                      <br />
+                      <span className="text-base md:text-lg tracking-widest">across marketplaces</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Fashion Quote - Vogue-inspired */}
-            <div className="mt-16 text-center max-w-md mx-auto">
-              <p className="text-white/60 text-sm italic font-light tracking-wide">
-                "Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening."
-              </p>
-              <p className="text-white/40 text-xs mt-2">— Coco Chanel</p>
+              
+              {/* Search Container - Centered in page */}
+              <div className="w-full max-w-2xl mx-auto mt-auto mb-auto">
+                <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-md overflow-hidden border border-black/5">
+                  <form onSubmit={handleSearch} className="p-6">
+                    {imagePreview ? (
+                      <div className="mb-4 relative">
+                        <div className="relative w-full h-64 rounded-lg overflow-hidden border border-black/5">
+                          <Image 
+                            src={imagePreview}
+                            alt="Preview"
+                            fill
+                            className="object-contain"
+                          />
+                          <button
+                            type="button"
+                            onClick={clearImagePreview}
+                            className="absolute top-2 right-2 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors"
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="mb-4">
+                        <input 
+                          type="text" 
+                          placeholder="Paste URL or search..." 
+                          className="w-full px-4 py-3 text-lg border border-black/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10 bg-white/70"
+                          value={urlInput}
+                          onChange={(e) => setUrlInput(e.target.value)}
+                        />
+                      </div>
+                    )}
+                    
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                    />
+                    
+                    <div className="flex items-center gap-4 mb-4">
+                      <button 
+                        type="button"
+                        className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+                        onClick={triggerFileUpload}
+                      >
+                        <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+                          <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} className="invert" />
+                        </div>
+                        <span>Upload Image</span>
+                      </button>
+                      
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-6 bg-black/5 rounded-full relative">
+                          <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+                        </div>
+                        <span className="text-sm text-black/60 font-light">Deep search</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-black/5 flex items-center justify-center">
+                          <span className="text-xs font-bold text-black/60">E</span>
+                        </div>
+                        <span className="text-sm text-black/60 font-light">Expert search</span>
+                      </div>
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      className="w-10 h-10 bg-black rounded-full flex items-center justify-center ml-auto hover:opacity-90 transition-opacity"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : (
+                        <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
+                      )}
+                    </button>
+                  </form>
+                  
+                  <div className="px-6 py-3 bg-black/5 text-xs text-black/50 font-light tracking-wider">
+                    SEARCH ACROSS: <span className="font-medium">VINTED</span> · <span className="font-medium">ETSY</span> · <span className="font-medium">DEPOP</span> · <span className="font-medium">EBAY</span> · <span className="font-medium">VESTIAIRE</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Fashion Quote - Moved to bottom */}
+              <div className="mt-auto mb-10 text-center max-w-md mx-auto">
+                <p className="text-black/50 text-sm italic font-light tracking-wide">
+                  "Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening."
+                </p>
+                <p className="text-black/40 text-xs mt-2">— Coco Chanel</p>
+              </div>
             </div>
           </div>
         </div>
