@@ -8,10 +8,11 @@ import SimilarProducts from '@/components/results/SimilarProducts';
 import { getMockSearchResults } from '@/lib/services/searchService';
 import { formatPrice, generateAffiliateLink, getPlatformLogo, getConditionLabel } from '@/lib/utils';
 
-interface ProductPageProps {
+type ProductPageProps = {
   params: {
     id: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
