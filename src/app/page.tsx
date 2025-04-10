@@ -70,46 +70,62 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black">
       <Header />
       
       <main className="flex-grow">
-        {/* Grid Background with Vintage Clothing Images */}
+        {/* Fashion-forward Background */}
         <div className="relative min-h-screen">
-          {/* Background Grid */}
-          <div className="absolute inset-0 grid grid-cols-5 md:grid-cols-8 grid-rows-4 gap-1">
-            {Array.from({ length: 32 }).map((_, i) => (
-              <div 
-                key={i} 
-                className="bg-cover bg-center"
-                style={{ backgroundImage: `url(/images/vintage-${(i % 8) + 1}.jpg)` }}
-              />
-            ))}
+          {/* Background with Gradient Overlay */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div 
+                  key={i} 
+                  className="relative h-full w-full overflow-hidden"
+                >
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transform transition-transform duration-10000 hover:scale-110 filter grayscale hover:grayscale-0"
+                    style={{ 
+                      backgroundImage: `url(/images/vintage-${(i % 8) + 1}.jpg)`,
+                      animationDelay: `${i * 0.5}s` 
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/30"></div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Diagonal Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-transparent"></div>
+            
+            {/* Accent Lines - Vogue-inspired */}
+            <div className="absolute left-0 top-0 w-px h-full bg-white/20"></div>
+            <div className="absolute right-0 top-0 w-px h-full bg-white/20"></div>
+            <div className="absolute top-1/3 left-0 w-full h-px bg-white/10"></div>
+            <div className="absolute bottom-1/3 left-0 w-full h-px bg-white/10"></div>
           </div>
-          
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/40"></div>
           
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
-            <div className="text-center mb-10">
-              <h1 className="text-6xl md:text-8xl font-bold text-white mb-4">
+            <div className="text-center mb-16">
+              <h1 className="text-7xl md:text-9xl font-bold text-white mb-4 tracking-tighter font-serif">
                 ratonica
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 font-light">
+              <p className="text-xl md:text-2xl text-white/90 font-light tracking-wide uppercase">
                 Discover Vintage Fashion Treasures
                 <br />
-                across marketplaces
+                <span className="text-lg md:text-xl tracking-widest">across marketplaces</span>
               </p>
             </div>
             
-            {/* Search Container */}
+            {/* Search Container - Keeping this clean as requested */}
             <div className="w-full max-w-2xl mx-auto">
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border border-white/20">
                 <form onSubmit={handleSearch} className="p-6">
                   {imagePreview ? (
                     <div className="mb-4 relative">
-                      <div className="relative w-full h-64 rounded-lg overflow-hidden border border-gray-200">
+                      <div className="relative w-full h-64 rounded-lg overflow-hidden border border-gray-100">
                         <Image 
                           src={imagePreview}
                           alt="Preview"
@@ -130,7 +146,7 @@ export default function Home() {
                       <input 
                         type="text" 
                         placeholder="Paste URL or search..." 
-                        className="w-full px-4 py-3 text-lg border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        className="w-full px-4 py-3 text-lg border border-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white/70"
                         value={urlInput}
                         onChange={(e) => setUrlInput(e.target.value)}
                       />
@@ -148,50 +164,58 @@ export default function Home() {
                   <div className="flex items-center gap-4 mb-4">
                     <button 
                       type="button"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-900 transition-colors"
                       onClick={triggerFileUpload}
                     >
-                      <div className="w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center">
-                        <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} />
+                      <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+                        <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} className="invert" />
                       </div>
                       <span>Upload Image</span>
                     </button>
                     
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-6 bg-gray-200 rounded-full relative">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+                      <div className="w-10 h-6 bg-black/10 rounded-full relative">
+                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
                       </div>
-                      <span className="text-sm text-gray-600">Deep search</span>
+                      <span className="text-sm text-gray-700 font-light">Deep search</span>
                     </div>
                     
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
-                        <span className="text-xs font-bold">E</span>
+                      <div className="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center">
+                        <span className="text-xs font-bold text-gray-700">E</span>
                       </div>
-                      <span className="text-sm text-gray-600">Expert search</span>
+                      <span className="text-sm text-gray-700 font-light">Expert search</span>
                     </div>
                   </div>
                   
                   <button 
                     type="submit" 
-                    className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center ml-auto hover:bg-gray-300 transition-colors"
+                    className="w-10 h-10 bg-black rounded-full flex items-center justify-center ml-auto hover:bg-gray-900 transition-colors"
                     disabled={isLoading}
                   >
                     {isLoading ? (
-                      <svg className="animate-spin h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                     ) : (
-                      <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} />
+                      <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
                     )}
                   </button>
                 </form>
                 
-                <div className="px-6 py-3 bg-gray-50 text-xs text-gray-500">
-                  Also search on: <span className="font-medium">Vinted</span>, <span className="font-medium">Etsy</span>, <span className="font-medium">Depop</span>, <span className="font-medium">eBay</span>, <span className="font-medium">Vestiaire Collective</span>
+                <div className="px-6 py-3 bg-black/5 text-xs text-gray-500 font-light tracking-wider">
+                  SEARCH ACROSS: <span className="font-medium">VINTED</span> · <span className="font-medium">ETSY</span> · <span className="font-medium">DEPOP</span> · <span className="font-medium">EBAY</span> · <span className="font-medium">VESTIAIRE</span>
                 </div>
               </div>
+            </div>
+            
+            {/* Fashion Quote - Vogue-inspired */}
+            <div className="mt-16 text-center max-w-md mx-auto">
+              <p className="text-white/60 text-sm italic font-light tracking-wide">
+                "Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening."
+              </p>
+              <p className="text-white/40 text-xs mt-2">— Coco Chanel</p>
             </div>
           </div>
         </div>
