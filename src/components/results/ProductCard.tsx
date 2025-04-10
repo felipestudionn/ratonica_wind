@@ -23,22 +23,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     imageUrl,
     productUrl,
     platform,
-    condition,
     similarityScore,
   } = product;
 
   const affiliateLink = generateAffiliateLink(productUrl);
-
-  const getConditionLabel = (condition: string) => {
-    switch (condition) {
-      case 'new': return 'New';
-      case 'like_new': return 'Like New';
-      case 'good': return 'Good';
-      case 'fair': return 'Fair';
-      case 'poor': return 'Poor';
-      default: return 'Unknown';
-    }
-  };
 
   const getPlatformLogo = (platform: string) => {
     switch (platform) {

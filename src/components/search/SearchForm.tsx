@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
 import { SearchQuery } from '@/lib/types';
 
 export interface SearchFormProps {
@@ -11,11 +9,7 @@ export interface SearchFormProps {
   compact?: boolean;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading, compact = false }) => {
-  const [query, setQuery] = useState<SearchQuery>({
-    type: 'image',
-    content: '',
-  });
+const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
   const [urlInput, setUrlInput] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {

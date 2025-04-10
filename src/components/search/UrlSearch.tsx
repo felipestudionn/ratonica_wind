@@ -37,7 +37,7 @@ const UrlSearch: React.FC<UrlSearchProps> = ({ onUrlEntered }) => {
       new URL(url);
       setError('');
       return true;
-    } catch (e) {
+    } catch (_) {
       setError('Please enter a valid URL');
       onUrlEntered('');
       return false;

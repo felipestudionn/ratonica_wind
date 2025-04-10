@@ -1,15 +1,14 @@
 'use client';
 
+import React from 'react';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
 import Logo from '@/components/ui/Logo';
-import SearchForm from '@/components/search/SearchForm';
-import { SearchQuery } from '@/lib/types';
-import { searchProducts, saveSearch } from '@/lib/services/searchService';
 import { X } from 'lucide-react';
+import { searchProducts, saveSearch } from '@/lib/services/searchService';
 
 export default function Home() {
   const router = useRouter();
@@ -212,7 +211,7 @@ export default function Home() {
               {/* Fashion Quote - Moved to bottom */}
               <div className="mt-auto mb-10 text-center max-w-md mx-auto">
                 <p className="text-black/50 text-sm italic font-light tracking-wide">
-                  "Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening."
+                  &quot;Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening.&quot;
                 </p>
                 <p className="text-black/40 text-xs mt-2">— Coco Chanel</p>
               </div>

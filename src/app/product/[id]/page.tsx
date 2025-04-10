@@ -2,7 +2,6 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
 import DupeMeter from '@/components/results/DupeMeter';
 import SimilarProducts from '@/components/results/SimilarProducts';
 import { getMockSearchResults } from '@/lib/services/searchService';

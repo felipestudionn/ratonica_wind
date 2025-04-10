@@ -30,23 +30,13 @@ const TextSearch: React.FC<TextSearchProps> = ({ onTextEntered }) => {
           onChange={handleTextChange}
         />
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <div className="text-sm text-gray-600">
-          <h4 className="font-medium mb-1">Search Tips:</h4>
-          <ul className="list-disc list-inside text-xs space-y-1">
-            <li>Include brand names</li>
-            <li>Specify item type</li>
-            <li>Add era or decade</li>
-          </ul>
-        </div>
-        <div className="text-sm text-gray-600">
-          <h4 className="font-medium mb-1">Examples:</h4>
-          <ul className="list-disc list-inside text-xs space-y-1">
-            <li>"Levi's 501 jeans 90s"</li>
-            <li>"Vintage Nike windbreaker"</li>
-            <li>"Y2K platform boots"</li>
-          </ul>
-        </div>
+      <div className="mt-4 space-y-2">
+        <p className="text-sm text-gray-700 font-medium">Example searches:</p>
+        <ul className="text-sm text-gray-500 space-y-1">
+          <li>&quot;Vintage Levi&apos;s 501 jeans&quot;</li>
+          <li>&quot;70s floral maxi dress&quot;</li>
+          <li>&quot;Y2K platform boots&quot;</li>
+        </ul>
       </div>
     </div>
   );

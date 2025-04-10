@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Filter, SlidersHorizontal } from 'lucide-react';
+import { ArrowLeft, SlidersHorizontal } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import ProductCard from './ProductCard';
@@ -22,12 +22,12 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
   const [results, setResults] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [platforms, setPlatforms] = useState<string[]>([
+  const [platforms] = useState<string[]>([
     'vinted', 'etsy', 'depop', 'ebay', 'vestiaire'
   ]);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
-  const [minScore, setMinScore] = useState(60);
+  const [minPrice] = useState(0);
+  const [maxPrice] = useState(1000);
+  const [minScore] = useState(60);
 
   const handleBackToSearch = () => {
     router.push('/');
@@ -109,7 +109,7 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
       <div className="text-center py-8">
         <h2 className="text-xl font-semibold mb-4">No results found</h2>
         <p className="text-gray-600 mb-6">
-          We couldn't find any matching items. Try adjusting your search or filters.
+          We couldn&#39;t find any matching items. Try adjusting your search or filters.
         </p>
         <Button onClick={() => router.push('/')}>
           New Search
