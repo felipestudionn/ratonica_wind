@@ -97,7 +97,9 @@ export default function Home() {
                 ratonica
               </h1>
               <p className="text-xl md:text-2xl text-white/90 font-light">
-                Discover exquisite vintage jewelry treasures
+                Discover Vintage Fashion Treasures
+                <br />
+                across marketplaces
               </p>
             </div>
             
