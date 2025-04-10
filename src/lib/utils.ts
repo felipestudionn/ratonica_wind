@@ -42,10 +42,7 @@ export function getPlatformLogo(platform: Platform): string {
  * Calculate similarity score (0-100) based on various factors
  * This is a mock implementation - in a real app, this would use ML/AI
  */
-export function calculateSimilarityScore(
-  sourceFeatures: Record<string, any>,
-  targetFeatures: Record<string, any>
-): number {
+export function calculateSimilarityScore(): number {
   // In a real implementation, this would compare visual features, text descriptions, etc.
   // For now, we'll return a random score between 60-100
   return Math.floor(Math.random() * 40) + 60;

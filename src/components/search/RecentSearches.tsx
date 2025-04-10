@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { SearchHistory } from '@/lib/types';
+import { Clock } from 'lucide-react';
+import { SearchHistory, SearchResult } from '@/lib/types';
 import { getSearchHistory } from '@/lib/services/searchService';
-import { formatPrice } from '@/lib/utils';
 
-export default function RecentSearches() {
+interface RecentSearchesProps {
+  onSearchSelect?: (search: SearchHistory) => void;
+}
+
+export default function RecentSearches({ onSearchSelect }: RecentSearchesProps = {}) {
   const [recentSearches, setRecentSearches] = useState<SearchHistory[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -14,8 +18,8 @@ export default function RecentSearches() {
         setIsLoading(true);
         const history = await getSearchHistory();
         // Convert to SearchHistory format
-        const searchHistory: SearchHistory[] = history.map((item) => ({
-          id: (item as any).id || '',
+        const searchHistory: SearchHistory[] = history.map((item: SearchResult) => ({
+          id: item.id || '',
           query: item.query,
           timestamp: item.timestamp,
           resultCount: item.products.length,
@@ -53,6 +57,14 @@ export default function RecentSearches() {
     );
   }
 
+  const handleSearchClick = (search: SearchHistory) => {
+    // Handle click on a recent search
+    console.log('Clicked on search:', search);
+    if (onSearchSelect) {
+      onSearchSelect(search);
+    }
+  };
+
   return (
     <div className="mt-6">
       <h3 className="text-lg font-semibold mb-2">Recent Searches</h3>
@@ -61,6 +73,7 @@ export default function RecentSearches() {
           <Link 
             href={`/results?id=${search.id}`} 
             key={search.id}
+            onClick={() => handleSearchClick(search)}
             className="block p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
           >
             <div className="flex justify-between items-center">
@@ -77,18 +90,7 @@ export default function RecentSearches() {
                 </p>
               </div>
               <div className="text-indigo-600">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
-                >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" 
-                    clipRule="evenodd" 
-                  />
-                </svg>
+                <Clock className="h-5 w-5" />
               </div>
             </div>
           </Link>

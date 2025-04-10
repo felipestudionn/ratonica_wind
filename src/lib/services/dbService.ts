@@ -5,7 +5,11 @@ import { config } from '@/lib/config';
 // In a real application, this would connect to MongoDB or Firebase
 
 // In-memory storage for development
-const searchHistoryStore: SearchResult[] = [];
+interface SearchResultWithId extends SearchResult {
+  id: string;
+}
+
+const searchHistoryStore: SearchResultWithId[] = [];
 
 /**
  * Save a search result to the database
@@ -15,7 +19,7 @@ export async function saveSearchToDb(searchResult: SearchResult): Promise<string
   const id = Math.random().toString(36).substring(2, 15);
   
   // Add ID to the search result
-  const resultWithId = {
+  const resultWithId: SearchResultWithId = {
     ...searchResult,
     id,
   };
@@ -33,7 +37,7 @@ export async function saveSearchToDb(searchResult: SearchResult): Promise<string
  */
 export async function getSearchById(id: string): Promise<SearchResult | null> {
   // In a real app, this would query MongoDB
-  const result = searchHistoryStore.find(item => (item as any).id === id);
+  const result = searchHistoryStore.find(item => item.id === id);
   return result || null;
 }
 
@@ -45,7 +49,7 @@ export async function getRecentSearches(limit: number = 10): Promise<SearchHisto
   return searchHistoryStore
     .slice(0, limit)
     .map(result => ({
-      id: (result as any).id || '',
+      id: result.id,
       query: result.query,
       timestamp: result.timestamp,
       resultCount: result.products.length,

@@ -31,6 +31,7 @@ export interface Product {
 
 // Search result interface
 export interface SearchResult {
+  id?: string;
   query: SearchQuery;
   products: Product[];
   timestamp: Date;

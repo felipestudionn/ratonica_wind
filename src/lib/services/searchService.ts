@@ -1,8 +1,8 @@
 import { Product, SearchQuery, SearchResult } from '@/lib/types';
 import { saveSearchToDb, getSearchById as fetchSearchById, getRecentSearches } from './dbService';
-import { calculateSimilarityScore } from '@/lib/utils';
 
 // Mock function to simulate image analysis with Vision API
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const analyzeImage = async (imageBase64: string): Promise<string> => {
   // In a real implementation, this would call Google Vision API or similar
   console.log('Analyzing image...');
