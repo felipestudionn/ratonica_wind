@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
+import { Heart, ExternalLink } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { formatPrice, generateAffiliateLink } from '@/lib/utils';
 import DupeMeter from './DupeMeter';
@@ -12,6 +12,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  
   const {
     title,
     brand,
@@ -48,48 +51,72 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
+  const toggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFavorite(!isFavorite);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+    <div 
+      className="bg-white rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow duration-300"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative aspect-square overflow-hidden">
         <Image
           src={imageUrl}
           alt={title}
           fill
-          className="object-cover transition-transform hover:scale-105"
+          className={`object-cover transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute top-2 right-2">
-          <DupeMeter score={similarityScore} />
+        
+        {/* Favorite Button */}
+        <button 
+          onClick={toggleFavorite}
+          className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center transition-colors hover:bg-white"
+        >
+          <Heart 
+            size={18} 
+            className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'} 
+          />
+        </button>
+        
+        {/* DupeMeter */}
+        <div className="absolute bottom-3 left-3">
+          <DupeMeter score={similarityScore} size="sm" />
         </div>
-      </div>
-      
-      <div className="p-4 flex flex-col flex-grow">
-        <div className="flex items-center mb-2">
+        
+        {/* Platform Badge */}
+        <div className="absolute bottom-3 right-3 bg-white/80 backdrop-blur-sm rounded-full px-2 py-1 flex items-center">
           <Image
             src={getPlatformLogo(platform)}
             alt={platform}
-            width={20}
-            height={20}
-            className="mr-2"
+            width={16}
+            height={16}
+            className="mr-1"
           />
-          <span className="text-sm text-gray-600 capitalize">{platform}</span>
-          <span className="ml-auto text-sm bg-gray-100 px-2 py-1 rounded-full">
-            {getConditionLabel(condition)}
-          </span>
+          <span className="text-xs font-medium capitalize">{platform}</span>
+        </div>
+      </div>
+      
+      <div className="p-3 flex flex-col flex-grow">
+        <div className="flex items-start justify-between mb-1">
+          <h3 className="font-medium text-sm line-clamp-2 flex-grow">{title}</h3>
         </div>
         
-        <h3 className="font-semibold text-lg mb-1 line-clamp-2">{title}</h3>
-        {brand && <p className="text-sm text-gray-600 mb-2">{brand}</p>}
+        {brand && <p className="text-xs text-gray-500 mb-2">{brand}</p>}
         
-        <div className="mt-auto pt-4 flex items-center justify-between">
-          <span className="font-bold text-lg">{formatPrice(price, currency)}</span>
+        <div className="mt-auto pt-2 flex items-center justify-between">
+          <span className="font-bold">{formatPrice(price, currency)}</span>
           <a 
             href={affiliateLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-black text-white px-3 py-2 text-sm font-medium hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center text-xs font-medium text-gray-600 hover:text-black transition-colors"
           >
-            View <ExternalLink className="ml-1" size={16} />
+            View <ExternalLink className="ml-1" size={12} />
           </a>
         </div>
       </div>
