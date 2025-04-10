@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ratonica - Find Similar Vintage Clothing
+
+Ratonica is a web application that helps users find vintage clothing similar to their favorite pieces. It works like Dupe.com but is specifically focused on vintage and second-hand fashion.
+
+## Features
+
+- **Multi-method Search**: Upload an image, paste a URL, or search by text
+- **AI-Powered Matching**: Find similar vintage items across multiple platforms
+- **Dupe Meter**: See how closely items match your search
+- **Multi-Platform Integration**: Search across Vinted, Etsy, Depop, eBay, and Vestiaire Collective
+- **Affiliate Marketing**: Built-in structure for monetization
+
+## Tech Stack
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **Backend**: Node.js with Python bridge for scraping and analysis
+- **Database**: MongoDB/Firebase for storing search history
+- **APIs**: Vision API for image analysis (mock implementation for now)
+- **Deployment**: Ready for Vercel deployment
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `/src/app`: Next.js App Router pages
+- `/src/components`: Reusable UI components
+  - `/ui`: Base UI components
+  - `/search`: Search-related components
+  - `/results`: Results display components
+- `/src/lib`: Utilities, services, and types
+  - `/services`: API and data services
+  - `/types`: TypeScript type definitions
+  - `/utils`: Helper functions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Future Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Chrome extension for searching while browsing other sites
+- Mobile app using React Native
+- Advanced filtering options
+- User accounts and saved searches
+- Real API integrations with vintage marketplaces
