@@ -1,0 +1,11 @@
+/* Importar Inter, una fuente similar a Helvetica pero gratuita */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200&display=swap');
+
+/* Definir una clase personalizada para texto ultra fino */
+.ultra-thin-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.3em;
+  font-feature-settings: "tnum" on, "lnum" on, "liga" off;
+  -webkit-font-smoothing: antialiased;
+}

@@ -25,8 +25,9 @@ export interface Product {
   imageUrl: string;
   productUrl: string;
   platform: Platform;
+  source?: string;
   condition?: ProductCondition;
-  similarityScore: number;
+  similarityScore?: number;
 }
 
 // Search result interface

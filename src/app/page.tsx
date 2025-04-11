@@ -183,7 +183,7 @@ export default function Home() {
                           />
                           {!urlInput && (
                             <div className="absolute inset-0 flex items-center pointer-events-none px-4">
-                              <span className="text-black/50 font-light text-base">fashion term: <span className="italic">"Chloe dress 2004"</span></span>
+                              <span className="text-black/50 font-light text-base">fashion term: <span className="italic">&quot;Chloe dress 2004&quot;</span></span>
                             </div>
                           )}
                         </div>
@@ -217,7 +217,7 @@ export default function Home() {
                   </form>
                   
                   <div className="px-6 py-3 bg-black/5 text-xs text-black/50 font-light tracking-wider">
-                    SEARCH ACROSS: <span className="font-medium">VINTED</span> · <span className="font-medium">ETSY</span> · <span className="font-medium">DEPOP</span> · <span className="font-medium">EBAY</span> · <span className="font-medium">VESTIAIRE</span>
+                    SEARCH ACROSS: <span className="font-medium">VINTED</span> &middot; <span className="font-medium">ETSY</span> &middot; <span className="font-medium">DEPOP</span> &middot; <span className="font-medium">EBAY</span> &middot; <span className="font-medium">VESTIAIRE</span>
                   </div>
                 </div>
               </div>

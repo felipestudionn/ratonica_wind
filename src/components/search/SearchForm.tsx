@@ -105,14 +105,14 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading, compact = 
               <div className="flex-grow relative">
                 <input 
                   type="text" 
-                  placeholder=""
+                  placeholder="fashion term: &quot;Chloe dress 2004&quot;"
                   className="w-full px-4 py-3 text-base font-light tracking-wide border border-black/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10 bg-white/70"
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                 />
                 {!urlInput && (
                   <div className="absolute inset-0 flex items-center pointer-events-none px-4">
-                    <span className="text-black/50 font-light text-base">fashion term: <span className="italic">"Chloe dress 2004"</span></span>
+                    <span className="text-black/50 font-light text-base">fashion term: <span className="italic">&quot;Chloe dress 2004&quot;</span></span>
                   </div>
                 )}
               </div>

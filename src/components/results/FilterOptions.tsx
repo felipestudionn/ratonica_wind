@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Slider } from '@/components/ui/Slider';
-import { Button } from '@/components/ui/Button';
 import { FilterOptions as FilterOptionsType, Platform } from '@/lib/types';
 import { config } from '@/lib/config';
 import { ChevronDown } from 'lucide-react';

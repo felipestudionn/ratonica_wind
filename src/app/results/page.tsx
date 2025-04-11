@@ -4,18 +4,15 @@ import React, { useState } from 'react';
 import { Suspense } from 'react';
 import ResultsContainer from '../../components/results/ResultsContainer';
 import FilterOptions from '../../components/results/FilterOptions';
-import { FilterOptions as FilterOptionsType, Platform, SearchQuery } from '../../lib/types';
+import { FilterOptions as FilterOptionsType, Platform } from '../../lib/types';
 import { config } from '../../lib/config';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import Footer from '@/components/ui/Footer';
 import Header from '@/components/ui/Header';
-import { SlidersHorizontal, ArrowLeft } from 'lucide-react';
 
 // Create a client component that uses useSearchParams
 function ResultsContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const type = searchParams.get('type');
   const content = searchParams.get('content');
   const id = searchParams.get('id');
@@ -34,19 +31,6 @@ function ResultsContent() {
     console.log('Filters changed:', newFilters);
     setFilters(newFilters);
     // In a real app, this would update the results
-  };
-
-  // Handle search
-  const handleSearch = (query: SearchQuery) => {
-    console.log('Search query:', query);
-    
-    // Construct the URL with search parameters
-    const params = new URLSearchParams();
-    params.set('type', query.type);
-    params.set('content', query.content);
-    
-    // Navigate to the results page with the new search parameters
-    router.push(`/results?${params.toString()}`);
   };
 
   return (

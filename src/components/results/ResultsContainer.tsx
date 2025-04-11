@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, SlidersHorizontal } from 'lucide-react';
 import { Product } from '@/lib/types';
-import { Button } from '@/components/ui/Button';
 import ProductCard from './ProductCard';
 import { getMockSearchResults } from '@/lib/services/searchService';
 
@@ -64,7 +63,7 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
       platforms.includes(product.platform) &&
       product.price >= minPrice &&
       product.price <= maxPrice &&
-      product.similarityScore >= minScore
+      (product.similarityScore ?? 0) >= minScore
     );
   });
 

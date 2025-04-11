@@ -88,7 +88,7 @@ export default function ProductPage({ params }: any) {
             
             <div className="mb-6">
               <p className="text-gray-700 mb-2">Similarity Score:</p>
-              <DupeMeter score={product.similarityScore} />
+              <DupeMeter score={product.similarityScore ?? 0} />
             </div>
             
             {product.description && (
