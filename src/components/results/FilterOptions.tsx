@@ -106,9 +106,9 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
   };
 
   return (
-    <div className="bg-[#f1efe7]">
+    <>
       {/* Price Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('price')}
           className="w-full flex justify-between items-center text-left"
@@ -138,7 +138,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Similarity Score Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('similarity')}
           className="w-full flex justify-between items-center text-left"
@@ -167,7 +167,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Platform Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('platforms')}
           className="w-full flex justify-between items-center text-left"
@@ -198,7 +198,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Category Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('category')}
           className="w-full flex justify-between items-center text-left"
@@ -216,7 +216,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Color Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('color')}
           className="w-full flex justify-between items-center text-left"
@@ -234,7 +234,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Designer Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('designer')}
           className="w-full flex justify-between items-center text-left"
@@ -252,7 +252,7 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
       </div>
       
       {/* Size Filter */}
-      <div className="border-t border-gray-200 py-4">
+      <div className="py-4">
         <button 
           onClick={() => toggleSection('size')}
           className="w-full flex justify-between items-center text-left"
@@ -278,6 +278,6 @@ export default function FilterOptions({ initialFilters, onFilterChange }: Filter
           Reset Filters
         </button>
       </div>
-    </div>
+    </>
   );
 }
