@@ -73,7 +73,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen" style={{ backgroundColor: '#f1efe7' }}>
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex flex-col min-h-screen">
         {/* Fashion-forward Background */}
         <div className="relative min-h-screen">
           {/* Background with Gradient Overlay */}
@@ -138,6 +138,25 @@ export default function Home() {
                             <X size={16} />
                           </button>
                         </div>
+                        <div className="mt-4 flex justify-center">
+                          <button 
+                            type="submit" 
+                            className="flex items-center gap-2 px-4 py-3 bg-[#8a6f5c] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                            disabled={isLoading}
+                          >
+                            <span>Search</span>
+                            {isLoading ? (
+                              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                            ) : (
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            )}
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <div className="mb-4 flex items-center gap-2 justify-center w-full max-w-2xl">
@@ -180,7 +199,9 @@ export default function Home() {
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                           ) : (
-                            <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                           )}
                         </button>
                       </div>
@@ -209,7 +230,9 @@ export default function Home() {
         </div>
       </main>
       
-      <Footer />
+      <footer className="mt-auto">
+        <Footer />
+      </footer>
     </div>
   );
 }
