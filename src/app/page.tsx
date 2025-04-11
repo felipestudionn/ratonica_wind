@@ -119,10 +119,10 @@ export default function Home() {
               
               {/* Search Container - Centered in page */}
               <div className="w-full max-w-2xl mx-auto mt-auto mb-auto">
-                <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-md overflow-hidden border border-black/5">
-                  <form onSubmit={handleSearch} className="p-6">
+                <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-md overflow-hidden border border-black/5 max-w-3xl mx-auto">
+                  <form onSubmit={handleSearch} className="p-6 flex flex-col items-center">
                     {imagePreview ? (
-                      <div className="mb-4 relative">
+                      <div className="mb-4 relative w-full max-w-2xl">
                         <div className="relative w-full h-64 rounded-lg overflow-hidden border border-black/5">
                           <Image 
                             src={imagePreview}
@@ -140,14 +140,49 @@ export default function Home() {
                         </div>
                       </div>
                     ) : (
-                      <div className="mb-4">
-                        <input 
-                          type="text" 
-                          placeholder="Paste URL or search..." 
-                          className="w-full px-4 py-3 text-lg border border-black/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10 bg-white/70"
-                          value={urlInput}
-                          onChange={(e) => setUrlInput(e.target.value)}
-                        />
+                      <div className="mb-4 flex items-center gap-2 justify-center w-full max-w-2xl">
+                        <button 
+                          type="button"
+                          className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-[#1a1a1a] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                          onClick={triggerFileUpload}
+                        >
+                          <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
+                            <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} className="invert" />
+                          </div>
+                          <span>Upload Image</span>
+                        </button>
+                        
+                        <span className="text-black/40 text-sm font-light px-1">or</span>
+                        
+                        <div className="flex-grow relative">
+                          <input 
+                            type="text" 
+                            placeholder=""
+                            className="w-full px-4 py-3 text-base font-light tracking-wide border border-black/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10 bg-white/70"
+                            value={urlInput}
+                            onChange={(e) => setUrlInput(e.target.value)}
+                          />
+                          {!urlInput && (
+                            <div className="absolute inset-0 flex items-center pointer-events-none px-4">
+                              <span className="text-black/50 font-light text-base">fashion term: <span className="italic">"Chloe dress 2004"</span></span>
+                            </div>
+                          )}
+                        </div>
+                        <button 
+                          type="submit" 
+                          className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-[#8a6f5c] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                          disabled={isLoading}
+                        >
+                          <span>Search</span>
+                          {isLoading ? (
+                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          ) : (
+                            <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
+                          )}
+                        </button>
                       </div>
                     )}
                     
@@ -158,48 +193,6 @@ export default function Home() {
                       accept="image/*"
                       onChange={handleFileUpload}
                     />
-                    
-                    <div className="flex items-center gap-4 mb-4">
-                      <button 
-                        type="button"
-                        className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
-                        onClick={triggerFileUpload}
-                      >
-                        <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                          <Image src="/icons/upload.svg" alt="Upload" width={12} height={12} className="invert" />
-                        </div>
-                        <span>Upload Image</span>
-                      </button>
-                      
-                      <div className="flex items-center gap-2">
-                        <div className="w-10 h-6 bg-black/5 rounded-full relative">
-                          <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
-                        </div>
-                        <span className="text-sm text-black/60 font-light">Deep search</span>
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-black/5 flex items-center justify-center">
-                          <span className="text-xs font-bold text-black/60">E</span>
-                        </div>
-                        <span className="text-sm text-black/60 font-light">Expert search</span>
-                      </div>
-                    </div>
-                    
-                    <button 
-                      type="submit" 
-                      className="w-10 h-10 bg-black rounded-full flex items-center justify-center ml-auto hover:opacity-90 transition-opacity"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                      ) : (
-                        <Image src="/icons/arrow-right.svg" alt="Search" width={20} height={20} className="invert" />
-                      )}
-                    </button>
                   </form>
                   
                   <div className="px-6 py-3 bg-black/5 text-xs text-black/50 font-light tracking-wider">
@@ -208,12 +201,8 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Fashion Quote - Moved to bottom */}
-              <div className="mt-auto mb-10 text-center max-w-md mx-auto">
-                <p className="text-black/50 text-sm italic font-light tracking-wide">
-                  &quot;Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening.&quot;
-                </p>
-                <p className="text-black/40 text-xs mt-2">— Coco Chanel</p>
+              <div className="mt-auto mb-10">
+                {/* Espacio en blanco para mantener la estructura */}
               </div>
             </div>
           </div>

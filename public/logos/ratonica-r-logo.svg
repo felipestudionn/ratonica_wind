@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @font-face {
+      font-family: 'Noto Serif Display ExtraCondensed';
+      src: url('/fonts/NotoSerifDisplayExtraCondensed-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+  
+  <!-- Círculo fino -->
+  <circle cx="20" cy="20" r="19" stroke="#8a6f5c" stroke-width="1" fill="none"/>
+  
+  <!-- Letra r estilizada en la fuente Noto Serif Display ExtraCondensed -->
+  <text x="20" y="27" font-family="'Noto Serif Display ExtraCondensed', serif" font-size="24" font-weight="400" font-style="italic" text-anchor="middle" fill="#8a6f5c">r</text>
+</svg>
