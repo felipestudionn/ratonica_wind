@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div 
-      className="bg-white rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow duration-300"
+      className="bg-white/80 rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -67,13 +67,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           <Heart 
             size={18} 
-            className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-600'} 
+            className={isFavorite ? 'fill-red-500 text-red-500' : 'text-black/60'} 
           />
         </button>
         
         {/* DupeMeter */}
         <div className="absolute bottom-3 left-3">
-          <DupeMeter score={similarityScore} size="sm" />
+          {similarityScore !== undefined && (
+            <DupeMeter score={similarityScore} size="sm" />
+          )}
         </div>
         
         {/* Platform Badge */}
@@ -89,20 +91,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
       
-      <div className="p-3 flex flex-col flex-grow">
+      <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-start justify-between mb-1">
           <h3 className="font-medium text-sm line-clamp-2 flex-grow">{title}</h3>
         </div>
         
-        {brand && <p className="text-xs text-gray-500 mb-2">{brand}</p>}
+        {brand && <p className="text-xs text-black/50 font-light mb-2">{brand}</p>}
         
         <div className="mt-auto pt-2 flex items-center justify-between">
-          <span className="font-bold">{formatPrice(price, currency)}</span>
+          <span className="font-medium text-[#8a6f5c]">{formatPrice(price, currency)}</span>
           <a 
             href={affiliateLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-xs font-medium text-gray-600 hover:text-black transition-colors"
+            className="inline-flex items-center text-xs font-medium text-[#8a6f5c] hover:text-[#a58778] transition-colors"
           >
             View <ExternalLink className="ml-1" size={12} />
           </a>

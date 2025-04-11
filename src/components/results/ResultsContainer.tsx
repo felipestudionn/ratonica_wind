@@ -70,16 +70,20 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
 
   // Sort results by similarity score (highest first)
   const sortedResults = [...filteredResults].sort(
-    (a, b) => b.similarityScore - a.similarityScore
+    (a, b) => {
+      // Ensure we have valid numbers for comparison
+      const scoreA = typeof a.similarityScore === 'number' ? a.similarityScore : 0;
+      const scoreB = typeof b.similarityScore === 'number' ? b.similarityScore : 0;
+      return scoreB - scoreA;
+    }
   );
 
   if (isLoading) {
     return (
       <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div key={i} className="bg-white/80 rounded-xl shadow-sm overflow-hidden">
               <div className="bg-gray-200 h-48"></div>
               <div className="p-4">
                 <div className="h-4 bg-gray-200 rounded mb-2"></div>
@@ -97,9 +101,12 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
     return (
       <div className="text-center py-8">
         <div className="text-red-500 mb-4">{error}</div>
-        <Button onClick={() => router.push('/')}>
+        <button 
+          onClick={() => router.push('/')}
+          className="px-4 py-2 bg-[#8a6f5c] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+        >
           Try Again
-        </Button>
+        </button>
       </div>
     );
   }
@@ -107,41 +114,45 @@ const ResultsContainer: React.FC<ResultsContainerProps> = ({ searchParams }) => 
   if (sortedResults.length === 0) {
     return (
       <div className="text-center py-8">
-        <h2 className="text-xl font-semibold mb-4">No results found</h2>
-        <p className="text-gray-600 mb-6">
+        <h2 className="text-xl font-medium mb-4 text-[#8a6f5c]">No results found</h2>
+        <p className="text-black/50 mb-6 font-light">
           We couldn&#39;t find any matching items. Try adjusting your search or filters.
         </p>
-        <Button onClick={() => router.push('/')}>
+        <button 
+          onClick={() => router.push('/')}
+          className="px-4 py-2 bg-[#8a6f5c] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+        >
           New Search
-        </Button>
+        </button>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <div className="text-sm text-gray-500">
+      <div className="flex justify-between items-center mb-8">
+        <div className="text-sm text-black/50 font-light">
           {sortedResults.length} results found
         </div>
         
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
+          <button 
+            className="flex items-center gap-2 px-4 py-2.5 border border-black/10 rounded-lg text-sm text-[#8a6f5c] hover:bg-[#8a6f5c]/5 transition-colors"
+          >
             <SlidersHorizontal size={16} />
             <span className="hidden md:inline">Sort</span>
-          </Button>
-          <Button 
-            variant="outline" 
+          </button>
+          <button 
             onClick={handleBackToSearch}
-            className="flex items-center gap-1"
+            className="flex items-center gap-2 px-4 py-2.5 bg-[#8a6f5c] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <ArrowLeft size={16} />
             Back to Search
-          </Button>
+          </button>
         </div>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedResults.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

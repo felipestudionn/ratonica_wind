@@ -5,13 +5,18 @@ import { Suspense } from 'react';
 import ResultsContainer from '../../components/results/ResultsContainer';
 import FilterOptions from '../../components/results/FilterOptions';
 import SearchForm from '../../components/search/SearchForm';
-import { FilterOptions as FilterOptionsType, Platform } from '../../lib/types';
+import { FilterOptions as FilterOptionsType, Platform, SearchQuery } from '../../lib/types';
 import { config } from '../../lib/config';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import Footer from '@/components/ui/Footer';
+import Header from '@/components/ui/Header';
+import { SlidersHorizontal, ArrowLeft } from 'lucide-react';
 
 // Create a client component that uses useSearchParams
 function ResultsContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const type = searchParams.get('type');
   const content = searchParams.get('content');
   const id = searchParams.get('id');
@@ -32,35 +37,60 @@ function ResultsContent() {
     // In a real app, this would update the results
   };
 
+  // Handle search
+  const handleSearch = (query: SearchQuery) => {
+    console.log('Search query:', query);
+    
+    // Construct the URL with search parameters
+    const params = new URLSearchParams();
+    params.set('type', query.type);
+    params.set('content', query.content);
+    
+    // Navigate to the results page with the new search parameters
+    router.push(`/results?${params.toString()}`);
+  };
+
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Search Results</h1>
-      
-      {/* New search form */}
-      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-        <h2 className="text-lg font-semibold mb-2">Search Again</h2>
-        <SearchForm compact />
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Filter sidebar */}
-        <div className="md:col-span-1">
-          <FilterOptions 
-            initialFilters={filters}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
+      <div className="relative z-10 pt-12 pb-8">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Header section with title and search form aligned horizontally */}
+          <div className="flex flex-col md:flex-row md:items-center md:gap-8 mb-12">
+            <h1 className="text-3xl font-light mb-6 md:mb-0 text-[#8a6f5c] italic tracking-tighter">Search Results</h1>
+            
+            {/* Search form */}
+            <div className="md:flex-grow">
+              <SearchForm 
+                compact 
+                onSearch={handleSearch}
+                isLoading={false}
+              />
+            </div>
+          </div>
         
-        {/* Results grid */}
-        <div className="md:col-span-3">
-          <ResultsContainer 
-            searchParams={{
-              type,
-              content,
-              id,
-              similar
-            }}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Filter sidebar */}
+            <div className="md:col-span-1">
+              <FilterOptions 
+                initialFilters={filters}
+                onFilterChange={handleFilterChange}
+              />
+            </div>
+          
+            {/* Results grid */}
+            <div className="md:col-span-3">
+              <div className="bg-white/80 rounded-xl shadow-sm p-6">
+                <ResultsContainer 
+                  searchParams={{
+                    type,
+                    content,
+                    id,
+                    similar
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -70,10 +100,17 @@ function ResultsContent() {
 // Main page component that uses Suspense
 export default function ResultsPage() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <Suspense fallback={<ResultsLoadingSkeleton />}>
-        <ResultsContent />
-      </Suspense>
+    <main className="flex flex-col min-h-screen" style={{ backgroundColor: '#f1efe7' }}>
+      <Header />
+      <div className="container mx-auto px-4 py-8">
+        <Suspense fallback={<ResultsLoadingSkeleton />}>
+          <ResultsContent />
+        </Suspense>
+      </div>
+      
+      <footer className="mt-auto">
+        <Footer />
+      </footer>
     </main>
   );
 }
